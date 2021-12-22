@@ -1,0 +1,121 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  height: 100vh;
+  width: 100vw;
+  background: url('./images/背景.jpg') ;
+  cursor: url('./images/警察.png') 50 50, auto;
+  
+ 
+}
+
+
+
+.light{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+
+#scoreboard{
+  width: 350px;
+  height: 350px;
+  background: url('./images/便利貼.png') no-repeat center/cover;
+  position: absolute;
+  top:0;
+  left:5%;
+}
+
+
+#clock{
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  top: 30%;
+  left:15%;
+  animation-name: move;
+  animation-duration: 2s;
+   animation-iteration-count:infinite; 
+  
+}
+
+@keyframes move {
+  50% {
+  
+  transform: rotate(10deg);
+  transform-origin: bottom;
+  }
+
+  0%,
+  100% {
+    transform: rotate(-12deg);
+    transform-origin: bottom;
+  }
+}
+
+
+ #money{
+  width: 75px;
+  height: 75px;
+  position: absolute;
+  top: 60%;
+  left:15%;
+  
+}
+
+
+#time{
+color: black;
+font-weight: bold;
+font-size: 3rem;
+position: absolute;
+top: 30%;
+right: 100px;
+}
+
+#num{
+  color: black;
+  font-weight: bold;
+  font-size: 3rem;
+  position: absolute;
+  top: 60%;
+right: 50px;
+}
+
+#people1{
+  width: 200px; 
+  height: 200px;
+  position: absolute;
+  top:430px;
+}
+
+#people2{
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  top:300px;
+  right:0;
+}
+
+#kid{
+  width:100px;
+  height: 100px;
+  position: absolute;
+  top:500px;
+  right:20%;
+}
+
+#people3{
+  width: 200px;
+  height: 150px;
+  position: absolute;
+  top:500px;
+  left: -10%;
+}

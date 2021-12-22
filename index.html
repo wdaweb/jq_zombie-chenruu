@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="all.css">
+  <title>Sambo killer</title>
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="scoreboard">
+      <img id="clock" src="./images/clock.png" alt=""><span id="time">30</span>
+      <img id="money" src="./images/錢.png" alt=""><span id="num"></span>
+    </div>
+
+    <div id="people">
+      <img id="people1" src="./images/外送員.png" alt="">
+      <img id="people2" src="./images/阿姨.png" alt="">
+      <img id="kid" src="./images/騎腳踏車.png" alt="">
+      <img id="people3" src="./images/重機.png" alt="">
+    </div>
+    <div class="light">
+      <img class="red" src="./images/紅燈.png" alt="">
+    </div>
+  </div>
+  <script src="jquery-3.6.0.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+
+    let second = 0
+    let time = 10
+    let score = 0
+    let x = 0
+    let y = 0
+
+
+    $(document).ready(function () {
+      $('#scoreboard').hide()
+      $('img').hide()
+      Swal.fire({
+        title: "交通安全",
+        html: `110年1-8月道路交通事故，共計21萬5,904件，<br>
+              死傷人數計28萬 7,670人<br>
+              (人人應遵守交通規則，警察機關亦加強執法取締交通違規，減少交通事故發生，讓每位用路人可以快樂出門、平安回家。)`,
+        icon: "warning"
+      })
+
+        .then(function (result) {
+          console.log(result)
+          if (result.isConfirmed === true) {
+            $('.red').fadeIn()
+            light = setInterval(function () {
+              second++
+              console.log(second)
+              if (second === 2) {
+                $('.red').attr('src', './images/黃燈.png')
+              } else if (second === 5) {
+                $('.red').attr('src', './images/綠燈.png')
+              } else if (second === 6) {
+                $('.red').remove()
+                clearInterval(light)
+
+
+                timer = setInterval(function () {
+                  $('#people img').show()
+                  $('#scoreboard').show()
+                  $('#scoreboard img').show()
+                  time--
+                  $('#time').text(time)
+
+                  game()
+
+                  if (time <= 0) {
+                    $('#clock').css({ 'animation-name': 'none' })
+                    clearInterval(timer)
+                    Swal.fire({
+                      title: `本日業績<br> $ ${score}`,
+                      html: "快樂出門，平安回家，別讓警察賺太多!",
+                      icon: "warning"
+                    })
+
+
+                    $('#people1').remove()
+                    $('#people2').remove()
+                    $('#people3').remove()
+                    $('#kid').remove()
+
+                  }
+
+
+                }, 800)
+
+              }
+            }, 1000)
+          }
+        })
+    })
+
+
+    const game = () => {
+      let move = 50
+      const top = `${Math.round(Math.random() * 100)}%`
+      const left = `${Math.round(Math.random() * 120)}%`
+      $('#people1').animate({ left: left }, 2000)
+      $('#people2').animate({ left: left }, 1000).animate({ top: top }, 1000)
+      $('#kid').animate({ left: `${move + 10}%` }, 5000).animate({ left: `${move + 30}%` }, 5000)
+      $('#people3').animate({ left: top })
+    }
+
+    $('#people1').click(function () {
+      x++
+      score += 600
+      $('#num').text(score)
+      $('#money').animate({ top: `52%` }).animate({ top: `60%` })
+      if (x === 6) {
+        Swal.fire({
+          title: "違規記點數6點",
+          html: "須吊扣駕照1個月及參加道安講習",
+          icon: "error"
+        })
+          .then(function (r) {
+            if (r.isConfirmed === true) $('#people1').hide()
+          })
+      }
+    })
+
+    $('#people2').click(function () {
+      y++
+      score += 600
+      $('#num').text(score)
+      $('#money').animate({ top: `52%` }).animate({ top: `60%` })
+      if (y == 3) {
+        Swal.fire({
+          title: "阿姨",
+          html: "好好騎車不要當三寶",
+          icon: "error"
+        })
+      }
+    })
+
+
+    $('#kid').click(function () {
+      score -= 600
+      $('#num').text(score)
+    })
+
+    $('people3').click(function () {
+      score -= 600
+      $('#num').text(score)
+    })
+
+
+
+
+
+  </script>
+
+
+
+
+
+
+
+</body>
+
+</html>
